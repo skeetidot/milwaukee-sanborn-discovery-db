@@ -87,9 +87,11 @@
     <div id ="make-history-box">
 		<div id = "options">
 		<p>Click on a building to:</p>
+		<ul>
 			<li>Get library information &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;about the map sheet</li>
-			<br>
 			<li>Contribute historic &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information about the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;building</li>
+		
+		</ul>
 		</div>
     </div>
 
@@ -110,7 +112,7 @@
         <div class="modal-content">
             <span class="close-about">&times;</span>
             <p>Placeholder element for development. </p>
-            <p>Information about Sanborns, AGSL & project will go here.</p>
+            <p>Information about Sanborns, AGSL and project will go here.</p>
             <p>Marker based on a design created by Alex Kwa from the Noun Project</p>
         </div>
     </div>

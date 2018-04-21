@@ -8,12 +8,13 @@ var place;
 var autocomplete;
 
 // Create a global InfoWindow object to store the info for the current marker
-var infowindow = new google.maps.InfoWindow();
+//var infowindow = new google.maps.InfoWindow();
+console.log("loadmap.js");
 
 // Call showAllReports() and initAutocomplete()
 function initialization() {
-    showAllReports();
-    initAutocomplete();
+    //showAllReports();
+    //initAutocomplete();
 }
 
 // Make an Ajax request to query all reports in the database
@@ -22,7 +23,7 @@ function showAllReports() {
 	
 	// Make an Ajax request to query all reports in the database using POST
     $.ajax({
-        url: 'HttpServlet',
+        url: 'SanbornServlet',
         type: 'POST',
         data: {
             "tab_id": "1" // Query tab
@@ -32,7 +33,7 @@ function showAllReports() {
         // Pass the JSON list to the mapInitialization() function to initialize the map
         // and add markers at the report locations
         success: function (reports) {
-        	mapInitialization(reports);
+        	//mapInitialization(reports);
         },
         // If the request fails, display an alert popup with the error
         error: function (xhr, status, error) {
@@ -42,6 +43,7 @@ function showAllReports() {
 }
 
 // Initialize the map and create markers at the report locations
+// TODO: Update for Sanborn site or remove
 function mapInitialization(reports) {
 	
 	// Define map options
@@ -158,6 +160,7 @@ function initAutocomplete() {
 }
 
 // When the user selects a place, zoom to it on the map
+//TODO: Update for Sanborn site or remove
 function onPlaceChanged() {
 	
 	// Store the current selected place
@@ -192,9 +195,10 @@ function onPlaceChanged() {
 }
 
 // Execute the initialization function once the page has loaded
-google.maps.event.addDomListener(window, 'load', initialization);
+// google.maps.event.addDomListener(window, 'load', initialization);
 
 // Call the initialization function when the user clicks the Query tab
+//TODO: Update for Sanborn site or remove
 $("[href='#query_report']").on("click", function() {
 	initialization();
 });
