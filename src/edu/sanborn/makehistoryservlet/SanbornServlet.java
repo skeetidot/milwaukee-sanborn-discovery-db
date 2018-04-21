@@ -31,7 +31,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 	 */
 	public SanbornServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -116,35 +115,36 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		String sql;
 
 		// Initialize a variable to store the ID
-		int building_id = 0;
+		int id = 0;
 
 		// Get the historic building information to be submitted to the database
 
 		// Get data from the POST request and store it in String variables
-		String historicAddress = request.getParameter("historicAddress");
-		String buildingCode = request.getParameter("buildingCode");
+		// The variable names match the database field names
+		String hist_addr = request.getParameter("hist_addr");
+		String build_code = request.getParameter("build_code");
 		String designation = request.getParameter("designation");
-		String historicBlogs = request.getParameter("historicBlogs");
+		String hist_blogs = request.getParameter("hist_blogs");
 		String comments = request.getParameter("comments");
 
 		/*
 		 * If any value is not null, add single quotes to be used in the SQL statement
 		 * when the values will be imported into the database
 		 */
-		if (historicAddress != null) {
-			historicAddress = "'" + historicAddress + "'";
+		if (hist_addr != null) {
+			hist_addr = "'" + hist_addr + "'";
 		}
 
-		if (buildingCode != null) {
-			buildingCode = "'" + buildingCode + "'";
+		if (build_code != null) {
+			build_code = "'" + build_code + "'";
 		}
 
 		if (designation != null) {
 			designation = "'" + designation + "'";
 		}
 
-		if (historicBlogs != null) {
-			historicBlogs = "'" + historicBlogs + "'";
+		if (hist_blogs != null) {
+			hist_blogs = "'" + hist_blogs + "'";
 		}
 
 		if (comments != null) {
@@ -152,9 +152,9 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		}
 
 		// Build the SQL string to INSERT the record into the historicbuildings table
-		sql = "INSERT INTO historicbuildings (building_id, hist_addr, build_code, designation , hist_blogs, comments"
-				+ ") VALUES ('" + building_id + ", " + historicAddress + "," + buildingCode + "," + designation + ","
-				+ historicBlogs + "," + comments + ")";
+		sql = "INSERT INTO historicbuildings (id, hist_addr, build_code, designation , hist_blogs, comments"
+				+ ") VALUES ('" + id + ", " + hist_addr + "," + build_code + "," + designation + "," + hist_blogs + ","
+				+ comments + ")";
 
 		System.out.println("Create Record SQL :" + sql);
 
@@ -162,9 +162,9 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		talktodb.modifyDB(sql);
 
 		// Get the next integer to be the building ID
-		ResultSet res = talktodb.queryDB("SELECT last_value FROM building_id_seq");
+		ResultSet res = talktodb.queryDB("SELECT last_value FROM id_seq");
 		res.next();
-		building_id = res.getInt(1);
+		id = res.getInt(1);
 
 		System.out.println("Success! Historic building information entered.");
 
@@ -180,12 +180,31 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 	}
 
+	/*
+	 * Query the records that have been created in the database and return the
+	 * results as a JSON object
+	 */
 	private void queryReport(HttpServletRequest request, HttpServletResponse response)
 			throws JSONException, SQLException, IOException {
 
 		System.out.println("Just testing add to db, worry about querying later.");
 
-		// JSONArray list = new JSONArray();
+		// Run the constructor to create a new DBUtility object
+		TalkToDB talktodb = new TalkToDB();
+
+		// Create a JSONArray list to store the reports returned by the query
+		JSONArray list = new JSONArray();
+
+		// Initialize a string to store the SQL
+		String sql;
+
+		// Query the records and use queryReportHelper() to add the results to the
+		// JSONArray
+		sql = "SELECT * from historicbuildings";
+		queryReportHelper(sql, list);
+
+		response.getWriter().write(list.toString());
+
 		//
 		// // request report
 		// if (report_type == null || report_type.equalsIgnoreCase("request")) {
@@ -220,10 +239,37 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		// response.getWriter().write(list.toString());
 	}
 
-	private void queryReportHelper(String sql, JSONArray list, String report_type, String disaster_type,
-			String resource_or_damage) throws SQLException {
-		System.out.println("Just testing add to db, worry about querying later.");
+	private void queryReportHelper(String sql, JSONArray list) throws SQLException {
 
+		System.out.println("Just testing add to db, worry about querying later.");
+	
+		// Run the constructor to create a new database utility object
+		TalkToDB talktodb = new TalkToDB();		
+
+		// Query the database to find all records matching the SQL query
+		ResultSet res = talktodb.queryDB(sql);
+
+		// While there are records in the ResultSet, add them to the JSONArray response
+		// object
+		while (res.next()) {
+
+			// Create a new HashMap list to store the attributes of each record
+			HashMap<String, String> m = new HashMap<String, String>();
+
+			// Add values to the HashMap list
+			m.put("id", res.getString("id"));
+			m.put("hist_addr", res.getString("hist_addr"));
+			m.put("build_code", res.getString("build_code"));
+			m.put("designation", res.getString("designation"));
+			m.put("hist_blogs", res.getString("hist_blogs"));
+			m.put("comments", res.getString("comments"));
+
+			// Add the HashMap list to the JSONArray response list
+			list.put(m);
+
+		}
+
+		// Run the constructor to create a new DBUtility object
 		// DBUtility dbutil = new DBUtility();
 		// if (disaster_type != null) {
 		// sql += " and disaster_type = '" + disaster_type + "'";
