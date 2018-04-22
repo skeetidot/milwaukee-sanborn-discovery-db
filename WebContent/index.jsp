@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="lib/leaflet/leaflet.css">
 <link href="css/style.css" rel="stylesheet">
 
+
 <!-- LEAFTLET JS -->
 <!-- Needs to go after Leaflet CSS -->
 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
@@ -151,43 +152,47 @@
 	</div>
 	<!-- DATA MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
 	
-	<!-- MAKE HISTORY MODAL -->
-<!-- 	<div id = "make-history-modal" class="modal"> -->
-<!-- 		MAKE HISTORY MODAL CONTENT -->
-<!-- 		<div class="modal-content"> -->
-<!-- 			<span class="close-make-history">&times;</span> -->
-			<form id="contribute-history-form">
-				<p>
-					Historic street address:<br>
-					<input type="text" name="historicAddress">
-				</p>
+<!-- 	<!-- MAKE HISTORY MODAL --> -->
+<!-- <!-- 	<div id = "make-history-modal" class="modal"> --> -->
+<!-- <!-- 		MAKE HISTORY MODAL CONTENT --> -->
+<!-- <!-- 		<div class="modal-content"> --> -->
+<!-- <!-- 			<span class="close-make-history">&times;</span> --> -->
+<!-- 			<form id="contribute-history-form"> -->
+<!-- 				<p> -->
+<!-- 					Historic street address:<br> -->
+<!-- 					<input type="text" name="historicAddress"> -->
+<!-- 				</p> -->
 				
-				<p>
-					Is this a:
-					<input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br>
-					<input type="radio" name="buildingCode" value="S">S - Store <br>
-					<input type="radio" name="buildingCode" value="F">F - Flat <br>
-					<input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F
-				</p>
+<!-- 				<p> -->
+<!-- 					Is this a: -->
+<!-- 					<input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br> -->
+<!-- 					<input type="radio" name="buildingCode" value="S">S - Store <br> -->
+<!-- 					<input type="radio" name="buildingCode" value="F">F - Flat <br> -->
+<!-- 					<input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F -->
+<!-- 				</p> -->
 				
-				<p>
-					If provided, please enter the title of the building on the map:<br>
-					(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br>
-					<input type="text" name="designation">
-				</p>
+<!-- 				<p> -->
+<!-- 					If provided, please enter the title of the building on the map:<br> -->
+<!-- 					(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br> -->
+<!-- 					<input type="text" name="designation"> -->
+<!-- 				</p> -->
 				
-				<p>
-					Link to article or blog related to history of this property:<br>
-					<input type="text" name="historicBlogs">
-				</p>
+<!-- 				<p> -->
+<!-- 					Link to article or blog related to history of this property:<br> -->
+<!-- 					<input type="text" name="historicBlogs"> -->
+<!-- 				</p> -->
 				
-				<p>
-					Tell us something about this property<br>
-					<input type="text" name="comments">
-				</p>
+<!-- 				<p> -->
+<!-- 					Tell us something about this property<br> -->
+<!-- 					<input type="text" name="comments"> -->
+<!-- 				</p> -->
 
-				<input type="submit" id="submitHistory" value="Submit" onsubmit="createRecord(this)">
-			</form>	
+<!-- 				<input type="submit" id="submitHistory" value="Submit" onsubmit="createRecord(this)"> -->
+<!-- 			</form>	 -->
+			
+			
+			
+			
 <!-- 		</div> -->
 <!-- 	</div> -->
 	<!-- MAKE HISTORY MODAL ENDS HERE -->
