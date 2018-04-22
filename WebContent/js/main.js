@@ -362,22 +362,39 @@ function getData(map) {
 		}
 		var repository = "<div class= 'item-key'><b>Repository: </b></div><div class='item-value'>" + feature.properties['Repository'] + "</div>";
 		var view = "<div class= 'item-link'>" + '<a href="' + feature.properties['Reference'] + '" target= "_blank">' + 'View in UWM Digital Collections</a></div>';
-		var makeHistoryButton = "<div class = 'makeHistoryText'>Add information about historic building:</div>"
+		var makeHistoryText = "<div class = 'makeHistoryText'>Add information about historic building:</div>"
 		var hint = "<div id = 'hint'>Hint: make sure the marker is placed directly on the building.</div><br>"
+		
+		var info = sheetname + businesses + view + makeHistoryText + hint;
 
 		/* form elements */
 
-		var historicAddress = 'Historic street address:<br><input type="text" name="historicAddress"><br><br>';
-		var buildingCode = 'Is this a:<br> <input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br><input type="radio" name="buildingCode" value="S">S - Store <br><input type="radio" name="buildingCode" value="F">F - Flat <br><input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F<br><br>';
-		var designation = 'If provided, please enter the title of the building on the map: <p>(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br><input type="text" name="designation"></p><br><br>';
-		var historicBlogs = 'Link to article or blog related to history of this property:<br><input type="text" name="historicBlogs"><br><br>';
-		var comments = 'Tell us something about this property<br><input type="text" name="comments"><br>';
-		var submitHistory = '<input type="submit" id="submitHistory" value="Submit">'
+		var historicAddressForm = 'Historic street address:<br><input type="text" name="historicAddress"><br><br>';
+		var buildingCodeForm = 'Is this a:<br> <input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br><input type="radio" name="buildingCode" value="S">S - Store <br><input type="radio" name="buildingCode" value="F">F - Flat <br><input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F<br><br>';
+		var designationForm = 'If provided, please enter the title of the building on the map: <p>(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br><input type="text" name="designation"></p><br><br>';
+		var historicBlogsForm = 'Link to article or blog related to history of this property:<br><input type="text" name="historicBlogs"><br><br>';
+		var commentsForm = 'Tell us something about this property<br><input type="text" name="comments"><br>';
+		var submitHistory = '<input type="submit" id="submitHistory" value="Submit" onsubmit="createRecord(this)">'
+			
+		var makeHistoryButton = '<input type="submit" id="makeHistoryButton" value="Make History">';
 
-		var form = '<form id = "contribute-history-form">Historic street address:<br><input type="text" name="historicAddress"><br><br>Is this a:<br> <input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br><input type="radio" name="buildingCode" value="S">S - Store <br><input type="radio" name="buildingCode" value="F">F - Flat <br><input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F<br><br>If provided, please enter the title of the building on the map: <p>(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br><input type="text" name="designation"></p><br><br>Link to article or blog related to history of this property:<br><input type="text" name="historicBlogs"><br><br> Tell us something about this property<br><input type="text" name="comments"><br><input type="submit" id="submitHistory" value="Submit"></form>';
+		//var form = '<form role="form" id="contribute-history-form">' + historicAddressForm + buildingCodeForm + designationForm + historicBlogsForm + commentsForm + submitHistory + '</form>';
 
-		var info = (sheetname + businesses + view + makeHistoryButton + hint + historicAddress + buildingCode + designation + historicBlogs + comments + submitHistory);
+		//var info = (sheetname + businesses + view + makeHistoryText + hint + historicAddressForm + buildingCodeForm + designationForm + historicBlogsForm + commentsForm + submitHistory);
+		
+		//var JSPForm = document.getElementById("contribute-history-form");
+		//var JSPFormHTML = JSPForm.innerHTML;
+		//var info = sheetname + businesses + view + makeHistoryText + hint + JSPForm;
+		//console.log(JSPForm);
+		
+		//console.log(makeHistoryButton);
+		//console.log(form);
+		//console.log(submitHistory);
+		
 
+		
+		info = info + makeHistoryButton;
+		
 		/*
 		 * PUSH INFO TO POPUP USING RESPONSIVE POPUP PLUGIN SO THAT POPUPS ARE
 		 * CENTERED ON MOBILE EVALUATE EFFICACY OF THIS PLUGIN -- IS THERE
@@ -387,10 +404,18 @@ function getData(map) {
 		sheetBoundaries.bindPopup(popup, {
 			offset : new L.Point(80, 80)
 		}).openPopup();
+		
+		makeHistoryButton = document.getElementById('makeHistoryButton');
+		makeHistoryButton.onclick = function () {
+			showForm();
+		}
 
-		// Register the submit event with the submitHistory tag
-		// Call createRecord when the user clicks Submit
-		$("#submitHistory").on("submit", createRecord);
+//		// Submit the form using JavaScript
+//		$(".contribute-history-form").on('submit', function(e) {
+//			e.preventDefault();
+//			console.log("clicked submit");
+//			createRecord();
+//		});
 	}
 
 	function addMarker(e) {
@@ -403,8 +428,17 @@ function getData(map) {
 		});
 	}
 
+	// Run this function when the user clicks the Make History button in the popup
+	function showForm() {
+		var contributeHistoryForm = document.getElementById('contribute-history-form');
+		console.log(contributeHistoryForm);
+		contributeHistoryForm.display = "block";
+	}
+	
 	// Run this function when the user clicks Submit on the popup
 	function createRecord(e) {
+		
+		console.log("in createRecord");
 
 		// Stop the form from submitting normally, 
 		// so the page stays on the Create Record tab after the record is submitted
@@ -414,7 +448,9 @@ function getData(map) {
 		// Each element of the array is a dictionary with two keys: "name" and "value"
 		// The names are the form element variables (i.e. field names)
 		// The values are the form element values (i.e. field values)
-		var a = $("#submitHistory").serializeArray();
+		var a = $("#contribute-history-form").serializeArray();
+		
+		console.log(a);
 
 		// Add tab_id = 0 to the Ajax request to indicate a new record (tab_id = 1 indicates a query)
 		a.push({
@@ -422,23 +458,23 @@ function getData(map) {
 			value : "0"
 		});
 
-		// Add the longitude of the selected address to the array
-		a.push({
-			name : "longitude",
-			value : e.latlng.lng
-		});
-
-		// Add the latitude of the selected address to the array
-		a.push({
-			name : "latitude",
-			value : e.latlng.lat
-		});
+//		// Add the longitude of the selected address to the array
+//		a.push({
+//			name : "longitude",
+//			value : e.latlng.lng
+//		});
+//
+//		// Add the latitude of the selected address to the array
+//		a.push({
+//			name : "latitude",
+//			value : e.latlng.lat
+//		});
 
 		// Exclude fields with blank values from the submission (users may leave some input fields blank)
 		a = a.filter(function(item) {
 			return item.value != '';
 		});
-
+		
 		// Send the Ajax request with the form data to the server using POST
 		$.ajax({
 			url : 'SanbornServlet',
@@ -487,6 +523,10 @@ function getData(map) {
 		document.getElementById("contribute-history-form").reset();
 
 	}
+	
+	// Register the submit event with the submitHistory tag
+	// Call createRecord when the user clicks Submit
+	$("#contribute-history-form").on("submit", createRecord);
 
 	// /* BRACKET CLOSING ASYNCHRONOUS GETJSON () METHOD
 	// ANY CODE THAT ENGAGES WITH THE BOUNDARY DATA LATER MUST BE IN THE

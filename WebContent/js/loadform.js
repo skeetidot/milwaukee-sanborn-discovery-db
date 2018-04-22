@@ -1,77 +1,3 @@
-// Run this function when the user selects the report type from the Create Report or Query tab 
-//function onSelectReportType(ele) {
-//
-//	// Find the form where the element was selected (Create Report or Query)
-//	var form = $(ele).parent().parent();
-//
-//	// Find the hidden elements
-//	var label = $(form).find(".additional_msg");
-//	var select = $(form).find(".additional_msg_select");
-//
-//	// Set the label and select options based on the selected report type
-//	switch (ele.value) {
-//
-//	// If the report type is donation or request:
-//	// 1. Set the label text to "Resource Type"
-//	// 2. Remove any existing options from the <select> element
-//	// 3. Set the default value in the <select> element to "Choose the resource type"
-//	// 4. Add resource options to the <select> element
-//	case "donation":
-//	case "request":
-//
-//		// Set the label text to "Resource Type"
-//		label.text("Resource Type:");
-//
-//		// Remove any existing options from the <select> element
-//		select.find('option').remove();
-//
-//		// Set the default value in the <select> element to "Choose the resource type"
-//		select.append($("<option></option>").attr("value", "").text("Choose the resource type"));
-//
-//		// Add the resource values to the <select> element
-//		selectValues = [ 'water', 'food', 'money', 'medicine', 'cloth', 'rescue/volunteer' ];
-//
-//		// Append each value to the <select> element options
-//		$.each(selectValues, function(index, value) {
-//			select.append($("<option></option>").attr("value", value).text(value));
-//		});
-//		break;
-//
-//	// If the report type is damage:
-//	// 1. Set the label text to "Damage Type"
-//	// 2. Remove any existing options from the <select> element
-//	// 3. Set the title in the <select> element to "Choose the damage type"
-//	// 4. Add damage options to the <select> element
-//	case "damage":
-//
-//		// Set the label to "Damage Type"
-//		label.text("Damage Type:");
-//
-//		// Remove any existing options from the <select> element
-//		select.find('option').remove();
-//
-//		// Set the default value in the <select> element to "Choose the damage type"
-//		select.append($("<option></option>").attr("value", "").text("Choose the damage type"));
-//
-//		// Add the damage values to the <select> element
-//		selectValues = [ 'pollution', 'building damage', 'road damage', 'casualty', 'other' ];
-//
-//		// Append each value to the <select> element options
-//		$.each(selectValues, function(index, value) {
-//			select.append($("<option></option>").attr("value", value).text(value));
-//		});
-//		break;
-//
-//	// If no report type is selected, hide the <div> tag
-//	default:
-//		$(form).find(".additional_msg_div").css("visibility", "hidden");
-//		return;
-//	}
-//
-//	// Show the <div> tag
-//	$(form).find(".additional_msg_div").css("visibility", "visible");
-//}
-
 // Run this function when the user clicks Submit on the Query tab
 function queryReport(event) {
 
@@ -124,6 +50,8 @@ $("#query_report_form").on("submit", queryReport);
 
 // Run this function when the user clicks Submit on the Create Report tab
 function createReport(event) {
+	
+	console.log("in Create Report");
 
 	// Stop the form from submitting normally,
 	// so the page stays on the Create Report tab after the report is submitted
@@ -134,7 +62,7 @@ function createReport(event) {
 	// "value"
 	// The names are the form element variables (e.g. disaster_type)
 	// The values are the form element values (e.g. hurricane)
-	var a = $("#create_report_form").serializeArray();
+	var a = $("#contribute-history-form").serializeArray();
 
 	// Add tab_id = 0 to the Ajax request to indicate a new report (tab_id = 1
 	// indicates a query)

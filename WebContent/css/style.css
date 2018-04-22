@@ -27,7 +27,7 @@ body {
     margin: 0;
 }
 
-#opacity-slider{
+#opacity-slider {
     touch-action: auto;
     -ms-touch-action: auto;
 }
@@ -302,12 +302,6 @@ margin-top:0px;}
 
 
 
-
-
-
-
-
-
 #make-history-box {
     display: block;
     position: fixed;
@@ -325,6 +319,14 @@ margin-top:0px;}
     font-size: 20px;
     text-decoration: none;
     box-shadow: 0 0 2px 2px #707070;
+}
+
+#contribute-history-form {
+	display: block;
+	position: fixed;
+	right: 2%;
+	width: 25%;
+	z-index: 999999;
 }
 
 
