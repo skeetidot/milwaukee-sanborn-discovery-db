@@ -94,11 +94,9 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 				queryReport(request, response);
 			}
 			catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -115,9 +113,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 		// Initialize a string to store the SQL
 		String sql;
-
-		// Initialize a variable to store the ID
-		int id = 0;
 
 		// Get the historic building information to be submitted to the database
 
@@ -154,9 +149,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		if (comments != null) {
 			comments = "'" + comments + "'";
 		}
-		
-		System.out.println("Hist_addr: " + hist_addr);
-		System.out.println("Build_code: " + build_code);
 
 		// Build the SQL string to INSERT the record into the historicbuildings table
 		sql = "INSERT INTO historicbuildings (hist_addr, build_code, designation , hist_blogs, comments, geom"
@@ -167,11 +159,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 		// Call modifyDB() to run the SQL query to insert the record
 		talktodb.modifyDB(sql);
-
-		// Get the next integer to be the building ID
-//		ResultSet res = talktodb.queryDB("SELECT last_value FROM id_seq");
-//		res.next();
-//		id = res.getInt(1);
 
 		System.out.println("Success! Historic building information entered.");
 
@@ -184,7 +171,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 			e.printStackTrace();
 		}
 		response.getWriter().write(data.toString());
-
 	}
 
 	/*
@@ -196,9 +182,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 		System.out.println("Just testing add to db, worry about querying later.");
 
-		// Run the constructor to create a new DBUtility object
-		TalkToDB talktodb = new TalkToDB();
-
 		// Create a JSONArray list to store the reports returned by the query
 		JSONArray list = new JSONArray();
 
@@ -207,49 +190,10 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 		// Query the records and use queryReportHelper() to add the results to the
 		// JSONArray
-		sql = "SELECT * from historicbuildings";
-		queryReportHelper(sql, list);
-
-		response.getWriter().write(list.toString());
-
-		//
-		// // request report
-		// if (report_type == null || report_type.equalsIgnoreCase("request")) {
-		// String sql = "select report.id, report_type, resource_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "request_report where reportor_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"request",disaster_type,resource_or_damage);
-		// }
-		//
-		// // donation report
-		// if (report_type == null || report_type.equalsIgnoreCase("donation")) {
-		// String sql = "select report.id, report_type, resource_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "donation_report where reportor_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"donation",disaster_type,resource_or_damage);
-		// }
-		//
-		// // damage report
-		// if (report_type == null || report_type.equalsIgnoreCase("damage")) {
-		// String sql = "select report.id, report_type, damage_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "damage_report where reportor_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"damage",disaster_type,resource_or_damage);
-		// }
-		//
-		// response.getWriter().write(list.toString());
-	}
-
-	private void queryReportHelper(String sql, JSONArray list) throws SQLException {
-
-		System.out.println("Just testing add to db, worry about querying later.");
-	
+		sql = "SELECT hist_addr, build_code, designation, hist_blogs,"
+			+ "ST_X(geom) as longitude, ST_Y(geom) as latitude, comments "
+			+ "FROM historicbuildings";
+		
 		// Run the constructor to create a new database utility object
 		TalkToDB talktodb = new TalkToDB();		
 
@@ -264,17 +208,89 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 			HashMap<String, String> m = new HashMap<String, String>();
 
 			// Add values to the HashMap list
-			//m.put("id", res.getString("id"));
 			m.put("hist_addr", res.getString("hist_addr"));
 			m.put("build_code", res.getString("build_code"));
 			m.put("designation", res.getString("designation"));
 			m.put("hist_blogs", res.getString("hist_blogs"));
+			m.put("latitude", res.getString("latitude"));
+			m.put("longitude", res.getString("longitude"));			
 			m.put("comments", res.getString("comments"));
 
 			// Add the HashMap list to the JSONArray response list
 			list.put(m);
+			
+			System.out.println(list);
 
 		}
+
+
+		//queryReportHelper(sql, list);
+		
+
+
+		// Return the response
+		response.getWriter().write(list.toString());
+
+		//
+		// // request report
+		// if (report_type == null || report_type.equalsIgnoreCase("request")) {
+		// String sql = "select report.id, report_type, resource_type, " +
+		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
+		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
+		// "request_report where reporter_id = person.id and report.id = " +
+		// "report_id";
+		// queryReportHelper(sql,list,"request",disaster_type,resource_or_damage);
+		// }
+		//
+		// // donation report
+		// if (report_type == null || report_type.equalsIgnoreCase("donation")) {
+		// String sql = "select report.id, report_type, resource_type, " +
+		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
+		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
+		// "donation_report where reporter_id = person.id and report.id = " +
+		// "report_id";
+		// queryReportHelper(sql,list,"donation",disaster_type,resource_or_damage);
+		// }
+		//
+		// // damage report
+		// if (report_type == null || report_type.equalsIgnoreCase("damage")) {
+		// String sql = "select report.id, report_type, damage_type, " +
+		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
+		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
+		// "damage_report where reporter_id = person.id and report.id = " +
+		// "report_id";
+		// queryReportHelper(sql,list,"damage",disaster_type,resource_or_damage);
+		// }
+		//
+		// response.getWriter().write(list.toString());
+	}
+
+//	private void queryReportHelper(String sql, JSONArray list) throws SQLException {
+//	
+//		// Run the constructor to create a new database utility object
+//		TalkToDB talktodb = new TalkToDB();		
+//
+//		// Query the database to find all records matching the SQL query
+//		ResultSet res = talktodb.queryDB(sql);
+//
+//		// While there are records in the ResultSet, add them to the JSONArray response
+//		// object
+//		while (res.next()) {
+//
+//			// Create a new HashMap list to store the attributes of each record
+//			HashMap<String, String> m = new HashMap<String, String>();
+//
+//			// Add values to the HashMap list
+//			m.put("hist_addr", res.getString("hist_addr"));
+//			m.put("build_code", res.getString("build_code"));
+//			m.put("designation", res.getString("designation"));
+//			m.put("hist_blogs", res.getString("hist_blogs"));
+//			m.put("comments", res.getString("comments"));
+//
+//			// Add the HashMap list to the JSONArray response list
+//			list.put(m);
+//
+//		}
 
 		// Run the constructor to create a new DBUtility object
 		// DBUtility dbutil = new DBUtility();
@@ -310,7 +326,7 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		// m.put("message", res.getString("message"));
 		// list.put(m);
 		// }
-	}
+	//}
 
 	public void main() throws JSONException {
 	}

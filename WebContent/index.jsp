@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -98,22 +99,17 @@
 	</div>
 
 
-	MAKE HISTORY
+	<!-- MAKE HISTORY -->
 	<div id="make-history-box">
 		<div id="options">
 			<p>Click on a building to:</p>
 			<ul>
-				<li>Get library information &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp;about the map sheet</li>
-				<li>Contribute historic
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information about the
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;building</li>
+				<li>Get library information about the map sheet</li>
+				<li>Contribute historic information about the building</li>
 
-			</ul>			
+			</ul>
 		</div>
 	</div>
-
-
 
 	<!-- NAVBAR LINKS -->
 	<div id="top-buttons">
@@ -149,59 +145,9 @@
 		</div>
 	</div>
 	<!-- DATA MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
-	
-<!-- 	MAKE HISTORY MODAL -->
-<!-- 	<div id = "make-history-modal" class="modal"> -->
-<!-- 		MAKE HISTORY MODAL CONTENT -->
-<!-- 		<div class="modal-content"> -->
-<!-- 			<span class="close-make-history">&times;</span> -->
-<!-- 			<form id="contribute-history-form"> -->
-<!-- 				<p> -->
-<!-- 					Historic street address:<br> -->
-<!-- 					<input type="text" name="historicAddress"> -->
-<!-- 				</p> -->
-				
-<!-- 				<p> -->
-<!-- 					Is this a: -->
-<!-- 					<input type="radio" name="buildingCode" value="D" checked>D - Dwelling<br> -->
-<!-- 					<input type="radio" name="buildingCode" value="S">S - Store <br> -->
-<!-- 					<input type="radio" name="buildingCode" value="F">F - Flat <br> -->
-<!-- 					<input type="radio" name="buildingCode" value="O">Other -- Not marked with D, S, or F -->
-<!-- 				</p> -->
-				
-<!-- 				<p> -->
-<!-- 					If provided, please enter the title of the building on the map:<br> -->
-<!-- 					(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)<br> -->
-<!-- 					<input type="text" name="designation"> -->
-<!-- 				</p> -->
-				
-<!-- 				<p> -->
-<!-- 					Link to article or blog related to history of this property:<br> -->
-<!-- 					<input type="text" name="historicBlogs"> -->
-<!-- 				</p> -->
-				
-<!-- 				<p> -->
-<!-- 					Tell us something about this property<br> -->
-<!-- 					<input type="text" name="comments"> -->
-<!-- 				</p> -->
-
-<!-- 				<input type="submit" id="submitHistory" value="Submit" onsubmit="createRecord(this)"> -->
-<!-- 			</form>	 -->
-			
-			
-			
-			
-<!-- 		</div> -->
-<!-- 	</div> -->
-	<!-- MAKE HISTORY MODAL ENDS HERE -->
-
 
 	<!-- LINK TO MAIN JAVASCRIPT -->
 	<script type="text/javascript" src="js/main.js"></script>
-
-	<!-- Load JavaScript -->
-	<!-- 	<script src="js/loadform.js"></script> -->
-	<!-- 	<script src="js/loadmap.js"></script> -->
 
 
 </body>

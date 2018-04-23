@@ -232,7 +232,7 @@ h1 {
     opacity: .7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin-top: 0px;
+    margin-top: 0.5em;
     margin-right: 6.5em;
     padding: 2px 1px 4px 1px;
 }
@@ -300,10 +300,10 @@ h1 {
     display: block;
     position: fixed;
     right: 20px;
-    top: 9em;
+    top: 10em;
     border-radius: 4px;
     border: 1px;
-    height: 7em;
+    height: auto;
     width: 198px;
     z-index: 100000;
     background-color: rgba(226, 140, 169, 0.90);
@@ -313,10 +313,16 @@ h1 {
     font-weight: 500;
     font-size: 20px;
     text-decoration: none;
-    box-shadow: 0 0 2px 2px #707070;
-    
+    box-shadow: 0 0 2px 2px #707070;   
 }
 
+.form-group {
+    margin-top: 1em;
+}
+
+#contribute-history-form .label {
+    margin-bottom: 0;
+}
 
 /* MAKE BACKGROUND DIV CHANGE COLOR */
 
@@ -631,7 +637,7 @@ h4 {
         }
 
         .geocoder-control {
-            top: 2.25em;
+            top: 5em;
             left: 5px;
             width: 70% !important;
         }
