@@ -1,17 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
 
 <!-- BOILERPLATE HTML -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-<!--320-->
+<!--320 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>1910 Milwaukee</title>
 
@@ -35,7 +33,7 @@
 <!--
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo-ggpJr485oHzwkfLkI-j8t6Z1nTrDV0&libraries=places"></script>
     <script type="text/javascript" src="lib/geosearch/geosearch.js"></script>
--->
+ -->
 
 
 
@@ -60,10 +58,10 @@
 <!-- JQUERY -->
 <script type="text/javascript" src="lib/jquery/jquery-3.1.1.js"></script>
 
-<!--<! &#45;&#45; TOUCH EVENT LIBRARY &ndash;&gt;-->
-<!--<script src="//rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js"></script>-->
+<!--<! &#45;&#45; TOUCH EVENT LIBRARY &ndash;&gt; -->
+<!--<script src="//rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js"></script> -->
 
-<!-- PROJ4 & PROJ4LEAFLET-->
+<!-- PROJ4 & PROJ4LEAFLET -->
 <script src="https://unpkg.com/proj4@2.4.3" type="text/javascript"></script>
 <script src="https://unpkg.com/proj4leaflet@1.0.1"
 	type="text/javascript"></script>
@@ -117,7 +115,7 @@
 
 
 
-	<!-- NAVBAR LINKS-->
+	<!-- NAVBAR LINKS -->
 	<div id="top-buttons">
 		<div class="mobile-buttons">
 			<div id="data-button">Data</div>
@@ -152,11 +150,11 @@
 	</div>
 	<!-- DATA MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
 	
-<!-- 	<!-- MAKE HISTORY MODAL --> -->
-<!-- <!-- 	<div id = "make-history-modal" class="modal"> --> -->
-<!-- <!-- 		MAKE HISTORY MODAL CONTENT --> -->
-<!-- <!-- 		<div class="modal-content"> --> -->
-<!-- <!-- 			<span class="close-make-history">&times;</span> --> -->
+<!-- 	MAKE HISTORY MODAL -->
+<!-- 	<div id = "make-history-modal" class="modal"> -->
+<!-- 		MAKE HISTORY MODAL CONTENT -->
+<!-- 		<div class="modal-content"> -->
+<!-- 			<span class="close-make-history">&times;</span> -->
 <!-- 			<form id="contribute-history-form"> -->
 <!-- 				<p> -->
 <!-- 					Historic street address:<br> -->
@@ -198,7 +196,7 @@
 	<!-- MAKE HISTORY MODAL ENDS HERE -->
 
 
-	<!-- LINK TO MAIN JAVASCRIPT-->
+	<!-- LINK TO MAIN JAVASCRIPT -->
 	<script type="text/javascript" src="js/main.js"></script>
 
 	<!-- Load JavaScript -->

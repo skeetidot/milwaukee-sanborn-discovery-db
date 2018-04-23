@@ -1,4 +1,4 @@
-// Create a global variable to store the map object
+/*// Create a global variable to store the map object
 var map;
 
 // Create a global place object to store the place selected in the autocomplete list
@@ -201,4 +201,4 @@ function onPlaceChanged() {
 //TODO: Update for Sanborn site or remove
 $("[href='#query_report']").on("click", function() {
 	initialization();
-});
+});*/

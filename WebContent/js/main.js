@@ -396,11 +396,11 @@ function getData(map) {
 		var html1 = `<form id = 'contribute-history-form' role = 'form'>`;
 		var html2 = 		`<div class = "form-group">`;
 		var html3 = 				`<label>Historic Street Address:</label>`;
-		var html4 =					`<input type = 'text' name = 'historicAddress' id = 'historicAddress'>`;
+		var html4 =					`<input type = 'text' name = 'hist_addr' id = 'historicAddress'>`;
 		var html5 = 		`</div>`;
 		var html6 = 		`<div class = "form-group">`;
 		var html7 = 				`<label>If building says D enter "Dwelling" - S enter "Store" - F enter "Flat - or if there is no marking, please enter "Other:" </label>`;
-		var html8 = 				`<input type = 'text' name = 'buildingCode' id = 'buildingCode'>`;
+		var html8 = 				`<input type = 'text' name = 'build_code' id = 'buildingCode'>`;
 		var html12 =		`</div>`;
 		var html13 =		`<div class = "form-group">`;
 		var html14 = 				`<label>If provided, please enter the title of the building on the map: <br><p>(e.g. Pabst Theater, Street Car Barn, Bowling Alley, etc.)</p></label>`;
@@ -408,7 +408,7 @@ function getData(map) {
 		var html16 = 		`</div>`;
 		var html17 =		`<div class = "form-group">`;
 		var html18 = 				`<label>Link to article or blog related to the history of this property:</label>`;
-		var html19 =				`<input type = 'text' name = 'historicBlogs' id = 'historicBlogs'>`;
+		var html19 =				`<input type = 'text' name = 'hist_blogs' id = 'historicBlogs'>`;
 		var html20 = 		`</div>`;
 		var html21 = 		`<div class = "form-group">`;
 		var html22 =				`<label>Tell us something about this property:</label>`;
@@ -419,46 +419,110 @@ function getData(map) {
 		var html27 = `</form>`;
 
 		
-		
-		
 		var formstatement = (html1 + html2 + linespace + html3 + linespace + linespace + html4 + linespace + html5 + html6 + linespace +
 				html7 + linespace + html8 + linespace  + html12 + linespace + linespace +
 				html14 + html15 + linespace + linespace + linespace + html16 + html17 + html18 + linespace + html19 + linespace + linespace +
 				html20 + linespace + html21 + linespace + html22 + html23 + html24 + html25 + html26 + html27);
-		console.log(formstatement);
+		//console.log(formstatement);
 		
 		
-	
-		
-		
-		/*important! This is the block of code needed to get anything to happen upon click of submit button*/
 		$(document).delegate('#submit', 'click', function (event) {
 			  event.preventDefault();
-			  var designation =$("#designation").val();
-//			  console.log(designation);
-			  var a = [];
-			  var addressArray = $('#historicAddress').serializeArray();
-			  var buildingCodeArray = $('#buildingCode').serializeArray();
-			  console.log(a);
-			  a.push(addressArray);
-			  a.push(buildingCodeArray);
-			  a.push({ name: "tab_id", value: "0" });
-			  console.log(a);
-			  a = a.filter(function(item){return item.value != '';});
-			  $.ajax({
-				    url: 'SanbornServlet',
-				    type: 'POST',
-				    data: a,
-				    success: function(reports) {
-				    	alert("Thank you for your contribution.");
-//				    	document.getElementById("create_report_form").reset();
-//				    	$(form).find(".additional_msg_div").css("visibility", "hidden");
-				    },
-				    error: function(xhr, status, error) {
-				      alert("Status: " + status + "\nError: " + error);
-				    }
-				  })
-			});
+			  //var dataArray = new Array;
+			  
+			  var dataArray = $("#contribute-history-form").serializeArray();
+			  
+			 // Add tab_id = 0 to the Ajax request to indicate a new report (tab_id = 1 indicates a query)
+			  dataArray.push({
+			 	name : "tab_id",
+				value : "0"
+			 });
+			  
+				// Add the longitude of the selected address to the array
+			  dataArray.push({
+					name : "longitude",
+					value : e.latlng.lng
+				});
+
+				// Add the latitude of the selected address to the array
+			  dataArray.push({
+					name : "latitude",
+					value : e.latlng.lat
+				});			  
+			  
+//			  var addressArray = $('#historicAddress').serializeArray();
+//			  var buildingArray = $('#buildingCode').serializeArray();
+//			  var designationArray = $('#designation').serializeArray();
+//			  var blogArray = $('#historicBlogs').serializeArray();
+//			  var commentsArray = $('#comments').serializeArray();
+//			  var getAddress = addressArray[0];
+//			  var getCode = buildingArray[0];
+//			  var getDesignation = designationArray[0];
+//			  var getBlog = blogArray[0];
+//			  var getComments = commentsArray[0];
+//			  var addressValue = getAddress['value'];
+//			  var codeValue = getCode['value'];
+//			  var designationValue = getDesignation['value'];
+//			  var blogValue = getBlog['value'];
+//			  var commentsValue = getComments['value'];
+			  
+//			  dataArray.push(addressValue);
+//			  dataArray.push(codeValue);
+//			  dataArray.push(designationValue);
+//			  dataArray.push(blogValue);
+//			  dataArray.push(commentsValue);
+			  
+			  console.log(dataArray);
+//			  var buildingArray = buildingArray.serializeArray();
+			  
+//			  console.log(addressArray);
+			  window.onload = initialize();
+				function initialize() {
+					$.ajax({
+					    url: 'SanbornServlet',
+					    type: 'POST',
+					    data: dataArray,
+					    success: function(reports) {
+					    	alert("Thank you for your contribution.");
+					    	document.getElementById("contribute-history-form").reset();
+					    },
+					    error: function(xhr, status, error) {
+						    alert("An AJAX error occured: " + status + "\nError: " + error);
+						  }
+					});
+				}
+			  
+		});
+		
+//		
+//		/*important! This is the block of code needed to get anything to happen upon click of submit button*/
+//		$(document).delegate('#submit', 'click', function (event) {
+//			  event.preventDefault();
+//			  var designation =$("#designation").val();
+////			  console.log(designation);
+//			  var a = [];
+//			  var addressArray = $('#historicAddress').serializeArray();
+////			  var buildingCodeArray = $('#buildingCode').serializeArray();
+//			  console.log(addressArray);
+////			  a.push(addressArray);
+////			  a.push(buildingCodeArray);
+//			  a.push({ name: "tab_id", value: "0" });
+////			  console.log(a);
+//			  addressArray = addressArray.filter(function(item){return item.value != '';});
+//			  $.ajax({
+//				    url: 'SanbornServlet',
+//				    type: 'POST',
+//				    data: addressArray,
+//				    success: function(reports) {
+//				    	alert("Thank you for your contribution.");
+////				    	document.getElementById("create_report_form").reset();
+////				    	$(form).find(".additional_msg_div").css("visibility", "hidden");
+//				    },
+//				    error: function(xhr, status, error) {
+//				      alert("Status: " + status + "\nError: " + error);
+//				    }
+//				  })
+//			});
 
 				
 		/*define what's going in the popup*/
