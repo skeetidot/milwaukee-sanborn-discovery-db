@@ -1,155 +1,157 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
 
-<head>
+	<!DOCTYPE html>
+	<html lang="en">
 
-<!-- BOILERPLATE HTML -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--<meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-<!--320 -->
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>1910 Milwaukee</title>
+	<head>
 
+		<!-- BOILERPLATE HTML -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+		<!--320-->
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>1910 Milwaukee</title>
 
-<!-- LINKS TO STYLE SHEETS -->
-<link rel="stylesheet" href="lib/leaflet/leaflet.css">
-<link href="css/style.css" rel="stylesheet">
+		<!-- LINKS TO STYLE SHEETS -->
+		<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+		<link href="css/style.css" rel="stylesheet">
 
+		<!-- LEAFTLET JS -->
+		<!-- Needs to go after Leaflet CSS -->
+		<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+		    crossorigin=""></script>
+		<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
+		<script type="text/javascript" src="lib/leaflet/leaflet-src.js"></script>
 
-<!-- LEAFTLET JS -->
-<!-- Needs to go after Leaflet CSS -->
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-	integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-	crossorigin="" type="text/javascript"></script>
-<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="lib/leaflet/leaflet-src.js"></script>
+		<!-- RESPONSIVE POPUP PLUGIN (MAKES POPUPS CENTER CORRECTLY ON MOBILE) -->
+		<script src="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.css" />
 
+		<!-- ESRI LEAFLET -->
+		<script src="https://unpkg.com/esri-leaflet@2.1.3/dist/esri-leaflet.js" integrity="sha512-pijLQd2FbV/7+Jwa86Mk3ACxnasfIMzJRrIlVQsuPKPCfUBCDMDUoLiBQRg7dAQY6D1rkmCcR8286hVTn/wlIg=="
+		    crossorigin=""></script>
 
+		<!-- ESRI LEAFLET GEOCODER -->
+		<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
+		<script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
 
-<!-- GOOGLE MAPS API & GEOSEARCH JS (FOR SEARCHING ADDRESSES) -->
-<!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo-ggpJr485oHzwkfLkI-j8t6Z1nTrDV0&libraries=places"></script>
-    <script type="text/javascript" src="lib/geosearch/geosearch.js"></script>
- -->
+		<!-- JQUERY -->
+		<script type="text/javascript" src="lib/jquery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
 
-
-
-<!-- RESPONSIVE POPUP PLUGIN (MAKES POPUPS CENTER CORRECTLY ON MOBILE) -->
-<script
-	src="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.js"
-	type="text/javascript"></script>
-<link rel="stylesheet"
-	href="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.css" />
-
-<!-- ESRI LEAFLET -->
-<script src="https://unpkg.com/esri-leaflet@2.1.3/dist/esri-leaflet.js"
-	integrity="sha512-pijLQd2FbV/7+Jwa86Mk3ACxnasfIMzJRrIlVQsuPKPCfUBCDMDUoLiBQRg7dAQY6D1rkmCcR8286hVTn/wlIg=="
-	crossorigin="" type="text/javascript"></script>
-
-<!-- ESRI LEAFLET GEOCODER -->
-<link rel="stylesheet"
-	href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
-<script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"
-	type="text/javascript"></script>
-
-<!-- JQUERY -->
-<script type="text/javascript" src="lib/jquery/jquery-3.1.1.js"></script>
-
-<!--<! &#45;&#45; TOUCH EVENT LIBRARY &ndash;&gt; -->
-<!--<script src="//rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js"></script> -->
-
-<!-- PROJ4 & PROJ4LEAFLET -->
-<script src="https://unpkg.com/proj4@2.4.3" type="text/javascript"></script>
-<script src="https://unpkg.com/proj4leaflet@1.0.1"
-	type="text/javascript"></script>
+		<!-- PROJ4 & PROJ4LEAFLET-->
+		<script src="https://unpkg.com/proj4@2.4.3"></script>
+		<script src="https://unpkg.com/proj4leaflet@1.0.1"></script>
 
 
-</head>
+	</head>
 
-<body>
+	<body>
 
-	<!-- MAP -->
-	<div class="custom-popup" id="map"></div>
+		<!-- MAP -->
+		<div class="custom-popup" id="map"></div>
 
-	<!-- SEARCH BOX -->
-	<div id="geocoder-control-input" type="text"
-		placeholder="Search for an address" autocomplete="true"></div>
+		<!-- SEARCH BOX -->
+		<div id="geocoder-control-input" type="text" placeholder="Search for an address" autocomplete="true"></div>
 
-	<!-- HEADER TITLE -->
-	<div id="title">
-		<h1>SANBORN MAPS OF MILWAUKEE</h1>
-	</div>
-
-	<div id="mobile-title">
-		<h1>
-			SANBORN MAPS <br> MILWAUKEE
-		</h1>
-	</div>
-
-
-	<!-- OPACITY SLIDER -->
-	<div id="opacity-slider">
-		<input type="range" min="0" max="100" value="80" step="1"
-			class="opacity-slider"
-			title="Click and drag the slider to change the opacity of the historic maps">
-	</div>
-
-
-	<!-- MAKE HISTORY -->
-	<div id="make-history-box">
-		<div id="options">
-			<p>Click on a building to:</p>
-			<ul>
-				<li>Get library information about the map sheet</li>
-				<li>Contribute historic information about the building</li>
-
-			</ul>
+		<!-- HEADER TITLE -->
+		<div id="title">
+			<h1>SANBORN MAPS OF MILWAUKEE </h1>
 		</div>
-	</div>
 
-	<!-- NAVBAR LINKS -->
-	<div id="top-buttons">
-		<div class="mobile-buttons">
-			<div id="data-button">Data</div>
-			<div id="about-button">About</div>
+		<div id="mobile-title">
+			<h1>SANBORN MAPS
+				<br> MILWAUKEE</h1>
 		</div>
-	</div>
 
 
-	<!-- ABOUT MODAL -->
-	<div id="about-modal" class="modal">
-		<!-- ABOUT MODAL CONTENT -->
-		<div class="modal-content">
-			<span class="close-about">&times;</span>
-			<p>Placeholder element for development.</p>
-			<p>Information about Sanborns, AGSL and project will go here.</p>
-			<p>Marker based on a design created by Alex Kwa from the Noun
-				Project</p>
+		<!-- OPACITY SLIDER -->
+		<div id="opacity-slider">
+			<input type="range" min="0" max="100" value="80" step="1" class="opacity-slider" title="Click and drag the slider to change the opacity of the historic maps">
+			<!--
+        <span class="min">0</span>
+        <span class="max">100</span>
+-->
 		</div>
-	</div>
-	<!-- ABOUT MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
 
 
-	<!-- DATA MODAL -->
-	<div id="data-modal" class="modal">
-		<!-- DATA MODAL CONTENT -->
-		<div class="modal-content">
-			<span class="close-data">&times;</span>
-			<p>Placeholder element for development.</p>
-			<p>Information about community-generated GIS data will go here.</p>
-			<p>We want to know what you want to tell us about your city.</p>
+		<!--MAKE HISTORY -->
+		<div id="make-history-box">
+			<div id="options">
+				<p>Click on the map to get item information.</p>
+			</div>
 		</div>
-	</div>
-	<!-- DATA MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
-
-	<!-- LINK TO MAIN JAVASCRIPT -->
-	<script type="text/javascript" src="js/main.js"></script>
 
 
-</body>
 
-</html>
+		<!-- NAVBAR LINKS-->
+		<div id="top-buttons">
+			<div class="mobile-buttons">
+				<!-- <div id="data-button">Data</div> -->
+				<div id="about-button">About the project</div>
+			</div>
+		</div>
+
+
+		<!-- ABOUT MODAL -->
+		<div id="about-modal" class="modal">
+			<!-- ABOUT MODAL CONTENT -->
+			<div class="modal-content">
+				<span class="close-about">&times;</span>
+				<div class="custom-header">Contact</div>
+				<p>Questions? Comments? Reach out to us at agsl@uwm.edu or on
+					<a href="https://twitter.com/agslib?lang=en">Twitter</a>.</p>
+				<div class="custom-header">About the Maps </div>
+				<p>The Sanborn Maps of Milwaukee are fire insurance atlases held by the American Geographical Society Library (AGSL). This
+					1910 atlas includes eight volumes, consisting of 830 map sheets. Sanborn maps were designed to assist fire insurance
+					agents with insuring property. Produced for over 12,000 urbanized areas in the United States, Sanborn maps have been
+					described by the Library of Congress as "the single most important record of urban growth and development in the United
+					States during the past one hundred years." The American Geographical Society Library holds Sanborn maps dating back
+					to 1894.</p>
+				<div class="custom-header">About the Project</div>
+				<p>In their original format, the 830 sheets are 25 inches tall by 22.5 inches wide. Each sheet exists as an individual map
+					item, and a particular city block can be found by referencing a paper key. The maps were digitized and uploaded to the
+					library’s
+					<a href="https://uwm.edu/lib-collections/sanborn/">Digital Collections</a> in 2007. To find an area, one must reference a digitized map key.</p>
+				<p>Finding information in these incredibly detailed and valuable map sheets is hindered by the segmented viewing process
+					of having to cross-reference map sheets with keys. This process of navigating thumbnails in a digital collection does
+					not lend itself to a truly immersive experience, where one can get a feel for what the city was like at the time, or
+					conceptualize how one map sheet fits in with others. For that reason, the American Geographical Society Library identified
+					this project as a goal for the library. </p>
+				<p>In 2017 Milwaukee County Land Information Office (MCLIO) georeferenced the American Geographical Society’s 1910 Sanborn
+					atlas sheets. Adding geographic location to these library items has opened doors for many exciting ways that scholars
+					can access historic information from these sources. Now, the sheets appear as one seamless map, but each sheet can be
+					isolated and linked to the individual item in the digital collection. This project is one of many the AGSL is envisioning
+					for these resources, so stay tuned for more to come.</p>
+				<div class="custom-header">About the Software</div>
+				<p>Have an idea for a mapping project using this atlas? The mosaiced sheets are published and available as a map service
+					<a href="http://webgis.uwm.edu/arcgisuwm/rest/services/AGSL/SanbornMaps/MapServer">here</a>.</p>
+				<p>These sheets were georeferenced using ArcMap, and published on the UWM ArcGIS server. The application was built using
+					Leaflet, a light-weight, flexible Javascript library created for web mapping.</p>
+				<p>
+					<a href="https://github.com/bellegis/sanborn-agsl">Project Github</a>
+				</p>
+				<div class="custom-header">Credits</div>
+				<p>Belle Lipton: Designer / Developer</p>
+				<p>Lauren Winkler: Designer / Developer</p>
+				<p>Marker based on a design created by Alex Kwa from the Noun Project</p>
+				<div class="custom-header">Special Thanks</div>
+				<p>Stephen Appel – Geospatial Information Specialist, American Geographical Society Library</p>
+				<p>Chris Scheele – Department of Geography, University of Wisconsin Madison</p>
+				<p>Emily Berth – GIS Technician, Milwaukee County Land Information Office</p>
+				<p>Kurt Meigast – IT Manager, UWM School of Architecture and Urban Planning</p>
+			</div>
+		</div>
+		<!-- ABOUT MODAL ENDS HERE (THESE ARE GOING TO BE LONG) -->
+
+
+		<!-- LINK TO MAIN JAVASCRIPT-->
+		<script type="text/javascript" src="js/main.js"></script>
+
+
+	</body>
+
+	</html>

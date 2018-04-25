@@ -500,7 +500,7 @@ function getData(map) {
 		var html26 = `</div>`;
 		var html27 = `</form>`;
 
-		var formstatement = (html1 + html2 + html3 + html4 + html5 + html6 + html7 + html8 + html12 + html13 + html14 + html15 + html16 + html17 + html18 + html19 + html20 + html21 + html22 + html23 + html24 + html25 + html26 + html27);
+		var formstatement = (linespace + html1 + html2 + html3 + html4 + html5 + linespace + html6 + html7 + html8 + html12 + linespace + html13 + html14 + html15 + html16 + linespace + html17 + html18 + html19 + html20 + linespace+ html21 + html22 + html23 + linespace + html24 + html25 + html26 + html27);
 
 		/* WHEN THE USER CLICKS SUBMIT IN THE POPUP */
 		$(document).delegate('#submit', 'click', function(event) {
@@ -631,43 +631,30 @@ function getData(map) {
 
 } // BRACKET CLOSING THE GETDATA FUNCTION
 
-/** ***************************************************************************** */
-/*
- * JAVASCRIPT RELATED TO OPENING AND CLOSING THE DATA AND ABOUT INFORMATION
- * WINDOWS
- */
+/********************************************************************************/
+/* JAVASCRIPT RELATED TO OPENING AND CLOSING THE DATA AND ABOUT INFORMATION WINDOWS */
 
 // GET THE MODALS
 var aboutModal = document.getElementById('about-modal');
-var dataModal = document.getElementById('data-modal');
 
 // GET THE IDS OF THE BUTTONS THAT OPEN THE MODALS
 var aboutBtn = document.getElementById("about-button");
-var dataBtn = document.getElementById("data-button");
+
+
 
 // GET THE <SPAN> ELEMENT THAT CLOSES THE MODAL
 var aboutSpan = document.getElementsByClassName("close-about")[0];
-var dataSpan = document.getElementsByClassName("close-data")[0];
 
 // WHEN THE USER CLICKS ON THE BUTTONS, OPEN EITHER MODAL
-aboutBtn.onclick = function() {
-	aboutModal.style.display = "block";
-}
-dataBtn.onclick = function() {
-	dataModal.style.display = "block";
+aboutBtn.onclick = function () {
+    aboutModal.style.display = "block";
 }
 
 // WHEN THE USER CLICKS ON THE <SPAN> (X), CLOSE THE MODAL
-aboutSpan.onclick = function() {
-	aboutModal.style.display = "none";
-}
-dataSpan.onclick = function() {
-	dataModal.style.display = "none";
+aboutSpan.onclick = function () {
+    aboutModal.style.display = "none";
 }
 
-// *************************************END OF MAIN.JS***********************************/
-dataSpan.onclick = function() {
-	dataModal.style.display = "none";
-}
+
 
 // *************************************END OF MAIN.JS***********************************/
