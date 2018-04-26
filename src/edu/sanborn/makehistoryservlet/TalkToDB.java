@@ -46,7 +46,6 @@ public class TalkToDB {
 	 * the query result. It uses connectDB() to connect to the database. If the
 	 * connection fails, it returns null.
 	 */
-	// execute a sql query (e.g. SELECT) and return a ResultSet
 	public ResultSet queryDB(String sql) {
 		Connection conn = connectDB();
 		ResultSet res = null;
@@ -86,10 +85,8 @@ public class TalkToDB {
 		}
 	}
 
-	// Main method, used to test the queryDB() and modify() methods
+	// Main method, used to test the queryDB() and modifyDB() methods
 	public static void main(String[] args) throws SQLException {
-
-		// You can test the methods you created here
 
 		// Initialize the database utility
 		TalkToDB historicbuildingtest = new TalkToDB();

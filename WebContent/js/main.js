@@ -31,7 +31,7 @@ var sanborn = L.esri.tiledMapLayer({
 	url : 'http://webgis.uwm.edu/arcgisuwm/rest/services/AGSL/SanbornMaps/MapServer',
 	maxZoom : 21,
 	minZoom : 0,
-	opacity : .8, // Initial opacity
+	opacity : 0.8, // Initial opacity
 	attribution : 'American Geographical Society Library, University of Wisconsin-Milwaukee'
 });
 
@@ -70,7 +70,7 @@ var mapOptions = {
 
 	// Set the layers to build into  the layer control
 	layers : [ Esri_WorldGrayCanvas, sanborn, historicBuildings ]
-}
+};
 
 // CREATE A NEW LEAFLET MAP WITH THE MAP OPTIONS
 var map = L.map('map', mapOptions);
@@ -79,7 +79,7 @@ var map = L.map('map', mapOptions);
 map.zoomControl.setPosition('bottomright');
 
 // SET THE BASEMAP
-// ONLY INCULDE ONE BASEMAP SO IT IS NOT PART OF THE LAYER LIST
+// ONLY INCLUDE ONE BASEMAP SO IT IS NOT PART OF THE LAYER LIST
 var baseMaps = {
 	"Grayscale" : Esri_WorldGrayCanvas
 };
@@ -109,24 +109,6 @@ $(".leaflet-control-layers input:checkbox:first").change(function() {
 		$('.opacity-slider').show();
 });
 
-// /* CREATE GETLAYER FUNCTION TO RETURN GEOJSON GLOBALLY AS "BOUNDARY LAYER" */
-// function getLayer (layer, sheetBoundaries){
-// var boundaryLayer = layer;
-// return boundaryLayer;
-// };
-
-// /* SET UP LISTENER -- ON LAYERADD TO THE MAP, CALL GET LAYER FUNCTION */
-// /* ON LAYER ADD: RETURN THE GEOJSON LAYER AS A GLOBAL VARIABLE */
-// /* ASSIGN THAT RETURNED LAYER TO VARIABLE "GLOBALLAYER" */
-// var globalLayer = map.on('layeradd', getLayer);
-// console.log(globalLayer);
-
-// $("#make-history-text").change(function (e) {
-// var ischecked = e.currentTarget.checked;
-// if (ischecked)
-// checking.unbindPopup(popup);
-// });
-
 /** ***************************************************************************** */
 /* JAVASCRIPT RELATED TO SETTING UP THE OPACITY SLIDER */
 (function() {
@@ -140,7 +122,7 @@ $(".leaflet-control-layers input:checkbox:first").change(function() {
 	// WHEN WE ADD THIS CONTROL OBJECT TO THE MAP
 	sliderControl.onAdd = function(map) {
 
-		// SELECT AN EXISTING DOM ELEMENT WITH AN ID OF 'OPACTY-SLIDER'
+		// SELECT AN EXISTING DOM ELEMENT WITH AN ID OF 'OPACITY-SLIDER'
 		var slider = L.DomUtil.get("opacity-slider");
 
 		// WHEN THE USER HOVERS OVER THE SLIDER ELEMENT
@@ -159,7 +141,7 @@ $(".leaflet-control-layers input:checkbox:first").change(function() {
 
 		// RETURN THE SLIDER FROM THE ONADD METHOD
 		return slider;
-	}
+	};
 
 	// ADD THE CONTROL OBJECT CONTAINING THE SLIDER ELEMENT TO THE MAP
 	sliderControl.addTo(map);
@@ -217,10 +199,10 @@ function getData(map) {
 	 * SEARCH BAR (BETA VERSION -- EXPLORING BEST ROUTE TO TAKE) ADD ESRI
 	 * LEAFLET SEARCH CONTROL
 	 */
-	var searchControl = document.getElementById('search')
+	var searchControl = document.getElementById('search');
 
 	// CREATE THE GEOCODING CONTROL AND ADD IT TO THE MAP
-	var searchControl = L.esri.Geocoding.geosearch({
+	searchControl = L.esri.Geocoding.geosearch({
 
 		// KEEP THE CONTROL OPEN
 		expanded : true,
@@ -303,7 +285,7 @@ function getData(map) {
             url: 'SanbornServlet',
             type: 'POST',
             data: {
-                "tab_id": "1" // Query tab
+                "tab_id": "1" // Query
             },
 
             // If the request succeeds, a JSON list of buildings is returned in the HTTP response
@@ -317,8 +299,8 @@ function getData(map) {
                 $.each(buildings, function (i, e) {
                     
                     // Get the coordinates for the building location
-                    var lng = Number(e['longitude']);
-                    var lat = Number(e['latitude']);
+                    var lng = Number(e.longitude);
+                    var lat = Number(e.latitude);
                     
                     // Create a LatLng object with the building location
                     var latlng = L.latLng(lat, lng);
@@ -338,15 +320,15 @@ function getData(map) {
                     var tooltip;
                     
                     // Get the building attributes
-                    var hist_addr = e['hist_addr'];
-                    var build_code = e['build_code'];
-                    var designation = e['designation'];
+                    var hist_addr = e.hist_addr;
+                    var build_code = e.build_code;
+                    var designation = e.designation;
                     
                     // Build the tooltip with the historic address, building code, and building designation (building name)
                     
                     // Add the designation, if any
                     if (designation != '') {
-                        tooltip = designation + "<br>";
+                        tooltip = "<b>" + designation + "</b><br>";
                     }                    
                     
                     // Add the historic address, if any
@@ -460,18 +442,18 @@ function getData(map) {
 		/** ***************************************************************************** */
 		
 		/* GET THE FEATURES FROM THE GEOJSON AND ADD THEM TO A POPUP */
-		var sheetname = "<div class= 'item-key'><b>Sheet Number:</b></div> <div class='item-value'>" + feature.properties['Sheet_Numb'] + "</div>";
+		var sheetname = "<div class= 'item-key'><b>Sheet Number:</b></div> <div class='item-value'>" + feature.properties.Sheet_Numb + "</div>";
 		var businesses = '';
 		for ( var business in feature.properties) {
-			var value = feature.properties['Business_P'];
+			var value = feature.properties.Business_P;
 			if (value !== null) {
-				businesses = "<div class= 'item-key' id = 'business'><b>Nearby Landmarks in 1910: </b></div><div class='item-value'>" + feature.properties['Business_P'] + "</div>";
+				businesses = "<div class= 'item-key' id = 'business'><b>Nearby Landmarks in 1910: </b></div><div class='item-value'>" + feature.properties.Business_P + "</div>";
 			}
 		}
-		var repository = "<div class= 'item-key'><b>Repository: </b></div><div class='item-value'>" + feature.properties['Repository'] + "</div>";
-		var view = "<div class= 'item-link'>" + '<a href="' + feature.properties['Reference'] + '" target= "_blank">' + 'View in UWM Digital Collections</a></div>';
-		var makeHistoryButton = "<div class = 'makeHistoryText'>Add information about historic building:</div>"
-		var hint = "<div id = 'hint'>Hint: make sure the marker is placed directly on the building and zoom in to see the building details.</div>"
+		var repository = "<div class= 'item-key'><b>Repository: </b></div><div class='item-value'>" + feature.properties.Repository + "</div>";
+		var view = "<div class= 'item-link'>" + '<a href="' + feature.properties.Reference + '" target= "_blank">' + 'View in UWM Digital Collections</a></div>';
+		var makeHistoryButton = "<div class = 'makeHistoryText'>Add information about historic building:</div>";
+		var hint = "<div id = 'hint'>Hint: make sure the marker is placed directly on the building and zoom in to see the building details.</div>";
 
 		/* BUILD THE FORM ELEMENTS */
 		var linespace = `<br>`;
@@ -570,7 +552,7 @@ function getData(map) {
                         
                     },
 					error : function(xhr, status, error) {
-						alert("An Ajax error occured: " + status + "\nError: " + error);
+						alert("An Ajax error occurred: " + status + "\nError: " + error);
 					}
 				});
 			}
@@ -648,12 +630,12 @@ var aboutSpan = document.getElementsByClassName("close-about")[0];
 // WHEN THE USER CLICKS ON THE BUTTONS, OPEN EITHER MODAL
 aboutBtn.onclick = function () {
     aboutModal.style.display = "block";
-}
+};
 
 // WHEN THE USER CLICKS ON THE <SPAN> (X), CLOSE THE MODAL
 aboutSpan.onclick = function () {
     aboutModal.style.display = "none";
-}
+};
 
 
 

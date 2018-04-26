@@ -62,8 +62,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		 * returns its value.
 		 */
 		String tab_id = request.getParameter("tab_id");
-		
-		System.out.println("in doPost");
 
 		/*
 		 * Create a report
@@ -130,23 +128,23 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		 * If any value is not null, add single quotes to be used in the SQL statement
 		 * when the values will be imported into the database
 		 */
-		if (hist_addr != null) {
+		if (hist_addr != null && hist_addr != "") {
 			hist_addr = "'" + hist_addr + "'";
 		}
 
-		if (build_code != null) {
+		if (build_code != null && build_code != "") {
 			build_code = "'" + build_code + "'";
 		}
 
-		if (designation != null) {
+		if (designation != null && designation != "") {
 			designation = "'" + designation + "'";
 		}
 
-		if (hist_blogs != null) {
+		if (hist_blogs != null && hist_blogs != "") {
 			hist_blogs = "'" + hist_blogs + "'";
 		}
 
-		if (comments != null) {
+		if (comments != null && comments != "") {
 			comments = "'" + comments + "'";
 		}
 
@@ -179,8 +177,6 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 	 */
 	private void queryReport(HttpServletRequest request, HttpServletResponse response)
 			throws JSONException, SQLException, IOException {
-
-		System.out.println("Just testing add to db, worry about querying later.");
 
 		// Create a JSONArray list to store the reports returned by the query
 		JSONArray list = new JSONArray();
@@ -218,115 +214,14 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 
 			// Add the HashMap list to the JSONArray response list
 			list.put(m);
-			
-			System.out.println(list);
 
 		}
-
-
-		//queryReportHelper(sql, list);
-		
-
 
 		// Return the response
 		response.getWriter().write(list.toString());
 
-		//
-		// // request report
-		// if (report_type == null || report_type.equalsIgnoreCase("request")) {
-		// String sql = "select report.id, report_type, resource_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "request_report where reporter_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"request",disaster_type,resource_or_damage);
-		// }
-		//
-		// // donation report
-		// if (report_type == null || report_type.equalsIgnoreCase("donation")) {
-		// String sql = "select report.id, report_type, resource_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "donation_report where reporter_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"donation",disaster_type,resource_or_damage);
-		// }
-		//
-		// // damage report
-		// if (report_type == null || report_type.equalsIgnoreCase("damage")) {
-		// String sql = "select report.id, report_type, damage_type, " +
-		// "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-		// "longitude, ST_Y(geom) as latitude, message from report, person, " +
-		// "damage_report where reporter_id = person.id and report.id = " +
-		// "report_id";
-		// queryReportHelper(sql,list,"damage",disaster_type,resource_or_damage);
-		// }
-		//
-		// response.getWriter().write(list.toString());
+
 	}
-
-//	private void queryReportHelper(String sql, JSONArray list) throws SQLException {
-//	
-//		// Run the constructor to create a new database utility object
-//		TalkToDB talktodb = new TalkToDB();		
-//
-//		// Query the database to find all records matching the SQL query
-//		ResultSet res = talktodb.queryDB(sql);
-//
-//		// While there are records in the ResultSet, add them to the JSONArray response
-//		// object
-//		while (res.next()) {
-//
-//			// Create a new HashMap list to store the attributes of each record
-//			HashMap<String, String> m = new HashMap<String, String>();
-//
-//			// Add values to the HashMap list
-//			m.put("hist_addr", res.getString("hist_addr"));
-//			m.put("build_code", res.getString("build_code"));
-//			m.put("designation", res.getString("designation"));
-//			m.put("hist_blogs", res.getString("hist_blogs"));
-//			m.put("comments", res.getString("comments"));
-//
-//			// Add the HashMap list to the JSONArray response list
-//			list.put(m);
-//
-//		}
-
-		// Run the constructor to create a new DBUtility object
-		// DBUtility dbutil = new DBUtility();
-		// if (disaster_type != null) {
-		// sql += " and disaster_type = '" + disaster_type + "'";
-		// }
-		// if (resource_or_damage != null) {
-		// if (report_type.equalsIgnoreCase("damage")) {
-		// sql += " and damage_type = '" + resource_or_damage + "'";
-		// } else {
-		// sql += " and resource_type = '" + resource_or_damage + "'";
-		// }
-		// }
-		// ResultSet res = dbutil.queryDB(sql);
-		// while (res.next()) {
-		// // add to response
-		// HashMap<String, String> m = new HashMap<String,String>();
-		// m.put("report_id", res.getString("id"));
-		// m.put("report_type", res.getString("report_type"));
-		// if (report_type.equalsIgnoreCase("donation") ||
-		// report_type.equalsIgnoreCase("request")) {
-		// m.put("resource_type", res.getString("resource_type"));
-		// }
-		// else if (report_type.equalsIgnoreCase("damage")) {
-		// m.put("damage_type", res.getString("damage_type"));
-		// }
-		// m.put("disaster", res.getString("disaster_type"));
-		// m.put("first_name", res.getString("first_name"));
-		// m.put("last_name", res.getString("last_name"));
-		// m.put("time_stamp", res.getString("time_stamp"));
-		// m.put("longitude", res.getString("longitude"));
-		// m.put("latitude", res.getString("latitude"));
-		// m.put("message", res.getString("message"));
-		// list.put(m);
-		// }
-	//}
 
 	public void main() throws JSONException {
 	}

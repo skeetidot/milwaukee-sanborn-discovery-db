@@ -48,7 +48,7 @@ body {
 }
 
 
-/* BROWSER ADDS MARGIN BY DEFAULT. THIS GETS RID OF SCROLLBAR */
+/* BROWSER ADDS MARGIN BY DEFAULT. THIS GETS RID OF SCROLL BAR */
 
 body {
     margin: 0;
@@ -224,13 +224,13 @@ h1 {
 	font-weight:300;
 	font-size:24px;
 	padding-left:none;
-	margin-left:none !impportant;
-}
+	margin-left:none !important;
+};
 
-.modal a:link {
+.modal-content a:link {
 	font-size:16px !important;
-	color:background-color: rgb(226, 140, 169) !important;
-}
+	color: rgb(226, 140, 169) !important;
+};
 
 
 
@@ -290,7 +290,7 @@ h1 {
     width: 94%;
 }
 
-.opacity-slider: hover {
+.opacity-slider .hover {
     opacity: 1;
 }
 
@@ -875,3 +875,4 @@ h4 {
             padding-left: .3em;
         }
     }
+}
