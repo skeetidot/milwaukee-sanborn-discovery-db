@@ -128,25 +128,40 @@ public class SanbornServlet extends javax.servlet.http.HttpServlet {
 		 * If any value is not null, add single quotes to be used in the SQL statement
 		 * when the values will be imported into the database
 		 */
-		if (hist_addr != null && hist_addr != "") {
+		if (hist_addr != null) {
 			hist_addr = "'" + hist_addr + "'";
 		}
+		else {
+			hist_addr = "";
+		}
 
-		if (build_code != null && build_code != "") {
+		if (build_code != null) {
 			build_code = "'" + build_code + "'";
 		}
+		else {
+			build_code = "";
+		}
 
-		if (designation != null && designation != "") {
+		if (designation != null) {
 			designation = "'" + designation + "'";
 		}
+		else {
+			designation = "";
+		}		
 
-		if (hist_blogs != null && hist_blogs != "") {
+		if (hist_blogs != null) {
 			hist_blogs = "'" + hist_blogs + "'";
 		}
+		else {
+			hist_blogs = "";
+		}		
 
-		if (comments != null && comments != "") {
+		if (comments != null) {
 			comments = "'" + comments + "'";
 		}
+		else {
+			comments = "";
+		}		
 
 		// Build the SQL string to INSERT the record into the historicbuildings table
 		sql = "INSERT INTO historicbuildings (hist_addr, build_code, designation , hist_blogs, comments, geom"

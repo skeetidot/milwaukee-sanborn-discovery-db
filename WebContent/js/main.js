@@ -530,32 +530,30 @@ function getData(map) {
 			 * POST. If the request is successful, reset the form. If the
 			 * request fails, display an error message.
 			 */
-			window.onload = initialize();
-			function initialize() {
-				$.ajax({
-					url : 'SanbornServlet',
-					type : 'POST',
-					data : dataArray,
-					success : function(reports) {
-                        
-                        // Display a confirmation message
-						alert("Thank you for your contribution.");
-                        
-                        // Reset the form
-						document.getElementById("contribute-history-form").reset();
-                        
-                        // Close the popup
-                        sheetBoundaries.closePopup();
-                        
-                        // Show all historic buildings from the database
-                        showAllBuildings();
-                        
-                    },
-					error : function(xhr, status, error) {
-						alert("An Ajax error occurred: " + status + "\nError: " + error);
-					}
-				});
-			}
+			$.ajax({
+				url : 'SanbornServlet',
+				type : 'POST',
+				data : dataArray,
+				success : function(reports) {
+                    
+                    // Display a confirmation message
+					alert("Thank you for your contribution.");
+                    
+                    // Reset the form
+					document.getElementById("contribute-history-form").reset();
+                    
+                    // Close the popup
+                    sheetBoundaries.closePopup();
+                    
+                    // Show all historic buildings from the database
+                    showAllBuildings();
+                    
+                },
+				error : function(xhr, status, error) {
+					alert("An Ajax error occurred: " + status + "\nError: " + error);
+				}
+			});
+
             
 		});
 
