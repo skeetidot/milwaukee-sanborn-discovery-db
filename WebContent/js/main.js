@@ -523,8 +523,6 @@ function getData(map) {
 				value : e.latlng.lat
 			});
 
-			console.log(dataArray);
-
 			/*
 			 * Send the Ajax request with the form data to the servlet using
 			 * POST. If the request is successful, reset the form. If the
